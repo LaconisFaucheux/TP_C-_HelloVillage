@@ -38,21 +38,37 @@ System.Console.WriteLine("\n");
 // test.stoneCost; // erreur constatée
 System.Console.WriteLine("\n");
 
-gondolin.CutWood(50);
-System.Console.WriteLine(gondolin.GetStone());
-System.Console.WriteLine(gondolin.GetWood());
+// gondolin.CutWood(50);
+// System.Console.WriteLine(gondolin.GetStone());
+// System.Console.WriteLine(gondolin.GetWood());
 
-gondolin.CutWood(6);
-System.Console.WriteLine(gondolin.GetStone());
-System.Console.WriteLine(gondolin.GetWood());
+// gondolin.CutWood(6);
+// System.Console.WriteLine(gondolin.GetStone());
+// System.Console.WriteLine(gondolin.GetWood());
 
-gondolin.CutWood(5);
-gondolin.CutWood(5);
-System.Console.WriteLine(gondolin.GetStone());
-System.Console.WriteLine(gondolin.GetWood());
+// gondolin.CutWood(5);
+// gondolin.CutWood(5);
+// System.Console.WriteLine(gondolin.GetStone());
+// System.Console.WriteLine(gondolin.GetWood());
 
-gondolin.CutWood(5);
-System.Console.WriteLine("\n");
+// gondolin.CutWood(5);
+// System.Console.WriteLine("\n");
+
+gondolin.CutWood(2);
+gondolin.MineStone(2);
+gondolin.CutWood(4);
+gondolin.MineStone(4);
+System.Console.WriteLine(gondolin.GetWood());
+System.Console.WriteLine(gondolin.GetStone());
+gondolin.BuildHouse(2);
+System.Console.WriteLine(gondolin.listHouse.Length);
+System.Console.WriteLine(gondolin.villageois);
+gondolin.CutWood(15);
+gondolin.MineStone(15);
+System.Console.WriteLine(gondolin.GetWood());
+System.Console.WriteLine(gondolin.GetStone());
+gondolin.BuildHouse(4);
+
 }
 
 Main();

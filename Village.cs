@@ -59,4 +59,16 @@ public class Village {
             _myRessources.AddWood(forest.CutWood(nbrVillagers));
         }
     }    
+
+    public void BuildHouse (int houseNbr) {
+        if (House.stone_needed * houseNbr > _myRessources.GetStone() || House.wood_needed * houseNbr > _myRessources.GetWood()) {
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseStone(House.stone_needed * houseNbr);
+            _myRessources.UseWood(House.wood_needed * houseNbr);
+            for (int i = 0; i < houseNbr; i++) {
+                addHouse();
+            }
+        }
+    }
 }
