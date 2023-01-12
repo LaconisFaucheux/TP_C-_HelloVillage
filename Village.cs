@@ -71,4 +71,16 @@ public class Village {
             }
         }
     }
+
+    public void UpgradeRessource() {
+        _myRessources.Upgrade();
+        LookAround();
+    }
+
+    public void LookAround () {
+        if (_myRessources.level >= 1) {
+            _myRessources.AddStone(1);
+            _myRessources.AddWood(1);
+        }
+    }
 }

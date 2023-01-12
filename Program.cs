@@ -64,11 +64,18 @@ gondolin.BuildHouse(2);
 System.Console.WriteLine(gondolin.listHouse.Length);
 System.Console.WriteLine(gondolin.villageois);
 gondolin.CutWood(15);
-gondolin.MineStone(15);
+gondolin.MineStone(5);
 System.Console.WriteLine(gondolin.GetWood());
 System.Console.WriteLine(gondolin.GetStone());
-gondolin.BuildHouse(4);
 
+gondolin.MineStone(5);
+System.Console.WriteLine($"Wood: {gondolin.GetWood()}.");
+System.Console.WriteLine($"Stone: {gondolin.GetStone()}.");
+gondolin.CutWood(10);
+gondolin.UpgradeRessource();
+gondolin.MineStone(30);
+System.Console.WriteLine($"Wood: {gondolin.GetWood()}.");
+System.Console.WriteLine($"Stone: {gondolin.GetStone()}.");
 }
 
 Main();
