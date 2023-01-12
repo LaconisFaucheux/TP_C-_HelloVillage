@@ -3,7 +3,7 @@ public class Ressources {
     private int _woodMax = 250;
     private int _stones;
     private int _stonesMax = 250;
-    public int level = 1;
+    public int level = 0;
 
     public Ressources() {
         this._woods = 10;
@@ -55,6 +55,7 @@ public class Ressources {
             _stonesMax *= 2;
             _woods -= woodCost;
             _stones -= stoneCost;
+            this.level++;
         }
     }
 }
