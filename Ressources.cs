@@ -16,10 +16,18 @@ public class Ressources {
     }
 
     public void UseStone(int nbr) {
-
+        if (nbr <= this._stones) this._stones -= nbr;
     }
 
     public void UseWood(int nbr) {
+        if (nbr <= this._woods) this._woods -= nbr;
+    }
 
+    public void AddStone (int nbr) {
+        this._stones += nbr;
+    }
+
+    public void AddWood (int nbr) {
+        this._woods += nbr;
     }
 }
