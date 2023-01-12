@@ -5,6 +5,7 @@ public class Village {
     public House chefHome;
     public House[] listHouse;
     public Mine mine;
+    public Forest forest;
 
 
     public Village (string name) {
@@ -14,6 +15,7 @@ public class Village {
         this.villageois += House.villageois;
         this.listHouse = new House[] {this.chefHome};
         this.mine = new Mine();
+        this.forest = new Forest();
     }
 
     public string getName() {
@@ -40,11 +42,21 @@ public class Village {
         } else if (Mine.stoneCost * nbrVillagers > _myRessources.GetStone() || Mine.woodCost * nbrVillagers > _myRessources.GetWood()) {
             System.Console.WriteLine("Ressources insuffisantes!");
         } else {
-            for (int i = 0; i < nbrVillagers; i++) {
-                _myRessources.UseStone(Mine.stoneCost);
-                _myRessources.UseWood(Mine.woodCost);
-                _myRessources.AddStone(Mine.gainStone);
-            }
+            _myRessources.UseStone(Mine.stoneCost * nbrVillagers);
+            _myRessources.UseWood(Mine.woodCost * nbrVillagers);
+            _myRessources.AddStone(mine.MineStone(nbrVillagers));
         }
-    }   
+    }
+
+    public void CutWood (int nbrVillagers) {
+        if (nbrVillagers > this.villageois) {
+            System.Console.WriteLine($"Pas assez de villageois! ({villageois} villageois disponibles).");
+        } else if (Forest.stoneCost * nbrVillagers > _myRessources.GetStone() || Forest.woodCost * nbrVillagers > _myRessources.GetWood()) {
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseStone(Forest.stoneCost * nbrVillagers);
+            _myRessources.UseWood(Forest.woodCost * nbrVillagers);
+            _myRessources.AddWood(forest.CutWood(nbrVillagers));
+        }
+    }    
 }
