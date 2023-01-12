@@ -1,4 +1,5 @@
 ﻿void Main() {
+
 System.Console.WriteLine(House.wood_needed);
 System.Console.WriteLine(House.stone_needed);
 
@@ -6,7 +7,7 @@ House justAHouse = new House();
 // justAHouse.wood_needed; //erreur attendue constatée
 
 Village gondolin = new Village("Gondolin");
-System.Console.WriteLine(gondolin.getName());
+System.Console.WriteLine(gondolin.GetName());
 System.Console.WriteLine(gondolin.listHouse.Length);
 // gondolin.addHouse();
 // gondolin.addHouse();
@@ -76,6 +77,11 @@ gondolin.UpgradeRessource();
 gondolin.MineStone(30);
 System.Console.WriteLine($"Wood: {gondolin.GetWood()}.");
 System.Console.WriteLine($"Stone: {gondolin.GetStone()}.");
+gondolin.UpgradeForest();
+gondolin.UpgradeMine();
+System.Console.WriteLine($"Wood: {gondolin.GetWood()}.");
+System.Console.WriteLine($"Stone: {gondolin.GetStone()}.");
+gondolin.GetLevels();
 }
 
 Main();

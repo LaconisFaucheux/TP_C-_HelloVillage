@@ -16,9 +16,32 @@ public class Village {
         this.listHouse = new House[] {this.chefHome};
         this.mine = new Mine();
         this.forest = new Forest();
+        string action = 
+            $"0) Afficher le statut de {GetName()}"+
+            "1) Bâtir une demeure \n"+
+            "2) Quérir de la bonne pierre  \n"+
+            "3) Quérir du bois solide \n"+
+            "4) Améliorer les pioches (Mine) \n"+ 
+            "5) Améliorer les haches (Forêt) \n"+
+            "6) Améliorer les dépôts \n"+
+            "0) Quitter";
+
+        while (true) {
+            System.Console.WriteLine($"Bienvenue à {GetName()}!");
+            System.Console.WriteLine("Que souhaitez vous faire?");
+            System.Console.WriteLine(action);
+            int choice = int.Parse(System.Console.ReadLine());
+
+            switch (choice) {
+                case 1:
+                System.Console.WriteLine(GetName());
+                System.Console.WriteLine($"Vous avez {listHouse.Length} maisons, et donc {villageois} villageois.");
+                break; 
+            }
+        }
     }
 
-    public string getName() {
+    public string GetName() {
         return _name;
     }
 
@@ -30,7 +53,7 @@ public class Village {
         return _myRessources.GetStone();
     }
 
-    private void addHouse() {
+    private void AddHouse() {
         Array.Resize(ref listHouse, listHouse.Length + 1);
         listHouse[listHouse.Length - 1] = new House();
         this.villageois = listHouse.Length * 10;
@@ -67,7 +90,7 @@ public class Village {
             _myRessources.UseStone(House.stone_needed * houseNbr);
             _myRessources.UseWood(House.wood_needed * houseNbr);
             for (int i = 0; i < houseNbr; i++) {
-                addHouse();
+                AddHouse();
             }
         }
     }
@@ -83,4 +106,28 @@ public class Village {
             _myRessources.AddWood(1);
         }
     }
+
+    public void UpgradeMine(){
+        if (_myRessources.GetStone() < ((mine.GetLevel() * 10) + 10) * 10) { // J'imagine que tu souhaitais qu'on utilise la méthode GetLevel, sinon j'aurais fait une méthode publique GetGainStone dans la classe Mine
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseStone(((mine.GetLevel() * 10) + 10) * 10);
+            mine.Upgrade();
+        }
+    }
+
+    public void UpgradeForest() {
+        if (_myRessources.GetWood() < ((forest.GetLevel() * 10) + 10) * 10) { // J'imagine que tu souhaitais qu'on utilise la méthode GetLevel, sinon j'aurais fait une méthode publique GetGainStone dans la classe Mine
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseWood(((mine.GetLevel() * 10) + 10) * 10);
+            forest.Upgrade();
+        }
+    }
+
+    public void GetLevels() { //Methode pour tester la bonne incrémentation des lvl
+        System.Console.WriteLine(mine.GetLevel());
+        System.Console.WriteLine(forest.GetLevel());
+    }
+
 }
