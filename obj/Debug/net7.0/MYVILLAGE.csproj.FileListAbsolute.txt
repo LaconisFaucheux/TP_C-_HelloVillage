@@ -1,0 +1,15 @@
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\bin\Debug\net7.0\MYVILLAGE.exe
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\bin\Debug\net7.0\MYVILLAGE.deps.json
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\bin\Debug\net7.0\MYVILLAGE.runtimeconfig.json
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\bin\Debug\net7.0\MYVILLAGE.dll
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\bin\Debug\net7.0\MYVILLAGE.pdb
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.csproj.AssemblyReference.cache
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.AssemblyInfoInputs.cache
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.AssemblyInfo.cs
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.csproj.CoreCompileInputs.cache
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.dll
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\refint\MYVILLAGE.dll
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.pdb
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\MYVILLAGE.genruntimeconfig.cache
+C:\Users\Lacon\Box\COURS\M2I\C#\MYVILLAGE\obj\Debug\net7.0\ref\MYVILLAGE.dll
