@@ -6,6 +6,7 @@ public class Village {
     public House[] listHouse;
     public Mine mine;
     public Forest forest;
+    public Fields fields;
 
 
     public Village (string name) {
@@ -16,14 +17,17 @@ public class Village {
         this.listHouse = new House[] {this.chefHome};
         this.mine = new Mine();
         this.forest = new Forest();
+        this.fields = new Fields();
         string action = 
             $"1) Afficher le statut de {GetName()}\n"+
-            "2) Bâtir une demeure (3 unités de bois et 3 unités de pierres requises)\n"+
-            "3) Quérir de la bonne pierre (coûte 2 pierres et un bois, mais rapporte 10 pierres)\n"+
-            "4) Quérir du bois solide (coûte 2 pierres et un bois, mais rapporte 10 bois) \n" +
-            "5) Améliorer les pioches (ajoute 10 au rendement de la mine contre 10 fois le rendement actuel de la mine) \n"+
-            "6) Améliorer les haches (ajoute 10 au rendement de la forêt contre 10 fois le rendement actuel de la forêt) \n" +
-            $"7) Améliorer les dépôts (double la capacité des dépôts de bois et de pierre contre 80% du maximum actuel de {_myRessources.GetMax()}). \n"+
+            "2) Bâtir une demeure (3 unités de bois, 3 unités de nourriture et 3 unités de pierres requises)\n"+
+            "3) Quérir de la bonne pierre (coûte 2 pierres, un de nourriture et un bois, mais rapporte 10 pierres)\n"+
+            "4) Quérir du bois solide (coûte 2 pierres, un de nourriture et un bois, mais rapporte 10 bois) \n" +
+            "5) Quérir bonne pitance (coûte 2 pierres, un de nourriture et un bois, mais rapporte 10 de nourriture) \n" +
+            "6) Améliorer les pioches (ajoute 10 au rendement de la mine contre 10 fois le rendement actuel de la mine) \n"+
+            "7) Améliorer les haches (ajoute 10 au rendement de la forêt contre 10 fois le rendement actuel de la forêt) \n" +
+            "8) Améliorer les charrues (ajoute 10 au rendement des champs contre 10 fois le rendement actuel des champs) \n" +
+            $"9) Améliorer les dépôts (double la capacité des dépôts de bois, de nourriture et de pierre contre 80% du maximum actuel de chaque (Max actuel: {_myRessources.GetMax()})). \n"+
             "0) Quitter\n";
         bool game = true;
 
@@ -38,7 +42,7 @@ public class Village {
                 if (choice < 0) Console.WriteLine("Bigre Monseigneur, votre choix est trop négatif! ");
 
             } catch {
-                Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la sainte liste!");
+                Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!");
             }
             
 
@@ -47,9 +51,11 @@ public class Village {
                     System.Console.WriteLine($"\n{GetName()}, tour d'horizon:");
                     System.Console.WriteLine($"Vous avez {listHouse.Length} maisons, et donc {villageois} villageois.");
                     Console.WriteLine
-                        ($"Votre mine est de niveau {mine.GetLevel()} avec un rendement de {mine.GetLevel() * 10 + 10}, votre forêt de niveau {forest.GetLevel()}, avec un rendement de {forest.GetLevel() * 10 + 10}.");
+                        ($"Votre mine est de niveau {mine.GetLevel()} avec un rendement de {mine.GetLevel() * 10 + 10}, votre forêt de niveau {forest.GetLevel()}, avec un rendement de {forest.GetLevel() * 10 + 10} " + 
+                        $"et vos champs de niveau {fields.GetLevel()} avec un rendement de {fields.GetLevel() * 10 + 10}");
                     Console.WriteLine
-                        ($"Vous disposez actuellement de {_myRessources.GetWood()} / {_myRessources.GetMax()} bois et de {_myRessources.GetStone()} / {_myRessources.GetMax()} pierres.\n");
+                        ($"Vous disposez actuellement de {_myRessources.GetWood()} / {_myRessources.GetMax()} bois, de {_myRessources.GetStone()} / {_myRessources.GetMax()} pierres, " + 
+                        $" et de {_myRessources.GetFood()} / {_myRessources.GetMax()} nourriture.\n");
                     break;
                     
                 case 2:
@@ -61,7 +67,7 @@ public class Village {
                         if (choice < 0) Console.WriteLine("Mais... Monseigneur, nous ne pouvons bâtir un nombre négatif de demeures!\n");
 
                     } catch {
-                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la sainte liste!\n");
+                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!\n");
                     }
                     BuildHouse(houseNbr);
                     break;
@@ -75,7 +81,7 @@ public class Village {
                         if (choice < 0) Console.WriteLine("Mais... Monseigneur, nous ne pouvons envoyer un nombre négatif de villageois!\n");
 
                     } catch {
-                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la sainte liste!\n");
+                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!\n");
                     }
                     MineStone(villagerNbrStone);
                     break;
@@ -92,20 +98,41 @@ public class Village {
                     }
                     catch
                     {
-                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la sainte liste!\n");
+                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!\n");
                     }
                     CutWood(villagerNbrWood);
                     break;
-
+                
                 case 5:
-                    UpgradeMine();
+                    Console.WriteLine("Combien de valeureux villageois souhaitez-vous envoyer aux champs?");
+                    int villagerNbrFood = 0;
+                    try
+                    {
+                        villagerNbrFood = int.Parse(System.Console.ReadLine());
+
+                        if (choice < 0) Console.WriteLine("Mais... Monseigneur, nous ne pouvons envoyer un nombre négatif de villageois!\n");
+
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!\n");
+                    }
+                    GrowFood(villagerNbrFood);
                     break;
 
                 case 6:
-                    UpgradeForest();
+                    UpgradeMine();
                     break;
 
                 case 7:
+                    UpgradeForest();
+                    break;
+
+                case 8:
+                    UpgradeFields();
+                    break;
+
+                case 9:
                     UpgradeRessource();
                     break;
 
@@ -123,7 +150,7 @@ public class Village {
                         } 
 
                     } catch {
-                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la sainte liste!");                       
+                        Console.WriteLine("Palsambleu Votre Altesse! Votre choix n'est point dans la Sainte liste!");                       
                     }
                     break;
             }
@@ -142,6 +169,10 @@ public class Village {
         return _myRessources.GetStone();
     }
 
+    public int GetFood() {
+        return _myRessources.GetFood();
+    }
+
     private void AddHouse() {
         Array.Resize(ref listHouse, listHouse.Length + 1);
         listHouse[listHouse.Length - 1] = new House();
@@ -151,35 +182,53 @@ public class Village {
     public void MineStone (int nbrVillagers) {
         if (nbrVillagers > this.villageois) {
             System.Console.WriteLine($"Pas assez de villageois! ({villageois} villageois disponibles).");
-        } else if (Mine.stoneCost * nbrVillagers > _myRessources.GetStone() || Mine.woodCost * nbrVillagers > _myRessources.GetWood()) {
+        } else if (Mine.stoneCost * nbrVillagers > _myRessources.GetStone() || Mine.woodCost * nbrVillagers > _myRessources.GetWood() || Mine.foodCost * nbrVillagers > _myRessources.GetFood()) {
             System.Console.WriteLine("Ressources insuffisantes!");
         } else {
             _myRessources.UseStone(Mine.stoneCost * nbrVillagers);
             _myRessources.UseWood(Mine.woodCost * nbrVillagers);
+            _myRessources.UseFood(Mine.foodCost * nbrVillagers);
             _myRessources.AddStone(mine.MineStone(nbrVillagers));
             Console.WriteLine($"C'est trois Nains qui ... Ah non! {nbrVillagers} villageois ont utilisé: {Mine.woodCost * nbrVillagers}" +
-                $"bois et {Mine.stoneCost * nbrVillagers} pierre pour ramèner {mine.MineStone(nbrVillagers)} pierres!\n");
+                $"bois, {Mine.stoneCost * nbrVillagers} pierre et {Mine.foodCost} nourriture pour ramener {mine.MineStone(nbrVillagers)} pierres!\n");
         }
     }
 
     public void CutWood (int nbrVillagers) {
         if (nbrVillagers > this.villageois) {
             System.Console.WriteLine($"Pas assez de villageois! ({villageois} villageois disponibles).");
-        } else if (Forest.stoneCost * nbrVillagers > _myRessources.GetStone() || Forest.woodCost * nbrVillagers > _myRessources.GetWood()) {
+        } else if (Forest.stoneCost * nbrVillagers > _myRessources.GetStone() || Forest.woodCost * nbrVillagers > _myRessources.GetWood() || Forest.foodCost * nbrVillagers > _myRessources.GetFood()) {
             System.Console.WriteLine("Ressources insuffisantes!");
         } else {
             _myRessources.UseStone(Forest.stoneCost * nbrVillagers);
             _myRessources.UseWood(Forest.woodCost * nbrVillagers);
+            _myRessources.UseFood(Forest.foodCost * nbrVillagers);
             _myRessources.AddWood(forest.CutWood(nbrVillagers));
-            Console.WriteLine($"{nbrVillagers} villageois ont utilisé: {Mine.woodCost * nbrVillagers} " +
-                $"bois et {Mine.stoneCost * nbrVillagers} pierre pour ramèner {forest.CutWood(nbrVillagers)} bois!\n");
+            Console.WriteLine($"{nbrVillagers} villageois ont utilisé: {Forest.woodCost * nbrVillagers} " +
+                $"bois, {Forest.stoneCost * nbrVillagers} pierre et {Forest.foodCost} nourriture pour ramener {forest.CutWood(nbrVillagers)} bois!\n");
         }
-    }    
+    }
 
-    public void BuildHouse (int houseNbr) {
-        if (House.stone_needed * houseNbr > _myRessources.GetStone() || House.wood_needed * houseNbr > _myRessources.GetWood()) {
+    public void GrowFood (int nbrVillagers) {
+        if (nbrVillagers > this.villageois) {
+            System.Console.WriteLine($"Pas assez de villageois! ({villageois} villageois disponibles).");
+        } else if (Fields.stoneCost * nbrVillagers > _myRessources.GetStone() || Fields.woodCost * nbrVillagers > _myRessources.GetWood() || Fields.foodCost * nbrVillagers > _myRessources.GetFood()) {
             System.Console.WriteLine("Ressources insuffisantes!");
         } else {
+            _myRessources.UseStone(Fields.stoneCost * nbrVillagers);
+            _myRessources.UseWood(Fields.woodCost * nbrVillagers);
+            _myRessources.UseFood(Fields.foodCost * nbrVillagers);
+            _myRessources.AddFood(fields.GatherFood(nbrVillagers));
+            Console.WriteLine($"{nbrVillagers} villageois ont utilisé: {Fields.woodCost * nbrVillagers} " +
+                $"bois, {Fields.stoneCost * nbrVillagers} pierre et {Fields.foodCost} pour ramèner {fields.GatherFood(nbrVillagers)} nourriture!\n");
+        }
+    }      
+
+    public void BuildHouse (int houseNbr) {
+        if (House.stone_needed * houseNbr > _myRessources.GetStone() || House.wood_needed * houseNbr > _myRessources.GetWood() || House.food_needed * houseNbr > _myRessources.GetFood()) {
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseFood(House.food_needed * houseNbr);
             _myRessources.UseStone(House.stone_needed * houseNbr);
             _myRessources.UseWood(House.wood_needed * houseNbr);
             for (int i = 0; i < houseNbr; i++) {
@@ -198,13 +247,14 @@ public class Village {
     public void UpgradeRessource() {
         _myRessources.Upgrade();
         LookAround();
-        Console.WriteLine($"Mine améliorée au niveau {_myRessources.level}!");
+        Console.WriteLine($"Dépôts améliorés au niveau {_myRessources.level}!");
     }
 
     public void LookAround () {
         if (_myRessources.level >= 1) {
             _myRessources.AddStone(1);
             _myRessources.AddWood(1);
+            _myRessources.AddFood(1);
         }
     }
 
@@ -222,15 +272,26 @@ public class Village {
         if (_myRessources.GetWood() < ((forest.GetLevel() * 10) + 10) * 10) { // J'imagine que tu souhaitais qu'on utilise la méthode GetLevel, sinon j'aurais fait une méthode publique GetGainStone dans la classe Mine
             System.Console.WriteLine("Ressources insuffisantes!");
         } else {
-            _myRessources.UseWood(((mine.GetLevel() * 10) + 10) * 10);
+            _myRessources.UseWood(((forest.GetLevel() * 10) + 10) * 10);
             forest.Upgrade();
             Console.WriteLine($"Forêt améliorée au niveau {forest.GetLevel()}!");
+        }
+    }
+
+    public void UpgradeFields() {
+        if (_myRessources.GetFood() < ((fields.GetLevel() * 10) + 10) * 10) { // J'imagine que tu souhaitais qu'on utilise la méthode GetLevel, sinon j'aurais fait une méthode publique GetGainStone dans la classe Mine
+            System.Console.WriteLine("Ressources insuffisantes!");
+        } else {
+            _myRessources.UseFood(((fields.GetLevel() * 10) + 10) * 10);
+            fields.Upgrade();
+            Console.WriteLine($"Champs améliorés au niveau {fields.GetLevel()}!");
         }
     }
 
     public void GetLevels() { //Methode pour tester la bonne incrémentation des lvl
         System.Console.WriteLine(mine.GetLevel());
         System.Console.WriteLine(forest.GetLevel());
+        System.Console.WriteLine(fields.GetLevel());
     }
 
 }

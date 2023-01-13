@@ -1,5 +1,5 @@
-public class Forest {
-    public static int gainWood = 10;
+public class Fields {
+    public static int gainFood = 10;
     public static int stoneCost = 2;
     public static int woodCost = 1;
     public static int foodCost = 1;
@@ -9,8 +9,8 @@ public class Forest {
         return this._level;
     }
     
-    public int CutWood(int nbVillagers) {
-        return nbVillagers * Forest.gainWood + _level * 10;
+    public int GatherFood(int nbVillagers) {
+        return nbVillagers * Fields.gainFood + _level * 10;
     }
 
     public void Upgrade() {

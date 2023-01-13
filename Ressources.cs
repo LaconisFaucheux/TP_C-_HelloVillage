@@ -1,4 +1,6 @@
 public class Ressources {
+    private int _food;
+    private int _foodMax = 250;
     private int _woods;
     private int _woodMax = 250;
     private int _stones;
@@ -8,6 +10,7 @@ public class Ressources {
     public Ressources() {
         this._woods = 10;
         this._stones = 10;
+        this._food = 10;
     }
 
     public int GetWood() {
@@ -18,7 +21,11 @@ public class Ressources {
         return _stones;
     }
 
-    public int GetMax() { //Dans la mesure où le dépôt fait augmenter simultanément bois et pierre, inutile de faire un getter différencié
+    public int GetFood() {
+        return _food;
+    } 
+
+    public int GetMax() { //Dans la mesure oï¿½ le dï¿½pï¿½t fait augmenter simultanï¿½ment bois et pierre, inutile de faire un getter diffï¿½renciï¿½
         return _woodMax;
     }
 
@@ -29,6 +36,10 @@ public class Ressources {
     public void UseWood(int nbr) {
         if (nbr <= this._woods) this._woods -= nbr;
     }
+
+    public void UseFood(int nbr) {
+        if (nbr <= this._food) this._food -= nbr;
+    } 
 
     public void AddStone (int nbr) {
         if (this._stones + nbr > _stonesMax){
@@ -41,24 +52,36 @@ public class Ressources {
 
     public void AddWood (int nbr) {
         if (this._woods + nbr > _woodMax){
-            this._stones = _woodMax;
+            this._woods = _woodMax;
             System.Console.WriteLine("Maximum de bois atteint!");
         } else {
             this._woods += nbr;            
         }
     }
 
+    public void AddFood (int nbr) {
+        if (this._food + nbr > _foodMax){
+            this._food = _foodMax;
+            System.Console.WriteLine("Maximum de nourriture atteint!");
+        } else {
+            this._food += nbr;            
+        }
+    }
+
     public void Upgrade() {
         int woodCost = _woodMax * (80/100);
         int stoneCost = _stonesMax * (80/100);
+        int foodCost = _foodMax * (80/100);
 
-        if (this._woods < woodCost || this._stones < stoneCost) {
+        if (this._woods < woodCost || this._stones < stoneCost || this._food < foodCost) {
             System.Console.WriteLine("Ressources insuffisantes");
         } else {
             _woodMax *= 2;
             _stonesMax *= 2;
+            _foodMax *= 2;
             _woods -= woodCost;
             _stones -= stoneCost;
+            _food -= foodCost;
             this.level++;
         }
     }
