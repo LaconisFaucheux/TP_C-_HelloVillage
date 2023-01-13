@@ -6,7 +6,7 @@ public class Mine {
     private int _level = 0;
 
     public Mine() {
-        System.Console.WriteLine("La mine a été crée!");
+        System.Console.WriteLine(" => Mine découverte et aménagée!\n");
     }
 
     public int GetLevel() {

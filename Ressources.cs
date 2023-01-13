@@ -18,6 +18,10 @@ public class Ressources {
         return _stones;
     }
 
+    public int GetMax() { //Dans la mesure où le dépôt fait augmenter simultanément bois et pierre, inutile de faire un getter différencié
+        return _woodMax;
+    }
+
     public void UseStone(int nbr) {
         if (nbr <= this._stones) this._stones -= nbr;
     }
